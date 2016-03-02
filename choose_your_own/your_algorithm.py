@@ -1,5 +1,6 @@
 #!/usr/bin/python
-
+import sys
+sys.path.insert(0,'/usr/lib/python2.7/site-packages/')
 import matplotlib.pyplot as plt
 from prep_terrain_data import makeTerrainData
 from class_vis import prettyPicture
@@ -33,7 +34,9 @@ plt.show()
 
 
 
-
+from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=10)
+clf = clf.fit(features_train, labels_train)
 
 
 

@@ -11,10 +11,10 @@
 """
     
 import sys
+sys.path.insert(0,'/usr/lib/python2.7/site-packages/')
 from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
-
 
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
@@ -22,12 +22,27 @@ from email_preprocess import preprocess
 features_train, features_test, labels_train, labels_test = preprocess()
 
 
-
+print features_train[:5]
+print features_test[:5]
+print labels_train[:5]
+print labels_test[:5]
 
 #########################################################
 ### your code goes here ###
 
 
 #########################################################
+
+from sklearn.naive_bayes import GaussianNB
+clf = GaussianNB()
+t0 = time()
+clf.fit(features_train, labels_train)
+print "training time:", round(time()-t0, 3), "s"
+t0 = time()
+pred = clf.predict(features_test)
+print "predicting time:", round(time()-t0, 3), "s"
+print pred
+print clf.score(features_test, labels_test)
+
 
 

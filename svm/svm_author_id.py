@@ -9,6 +9,7 @@
 """
     
 import sys
+sys.path.insert(0,'/usr/lib/python2.7/site-packages/')
 from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
@@ -27,4 +28,20 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 
+from sklearn import svm
+
+#features_tirain = features_train[:len(features_train)/100]
+#labels_train = labels_train[:len(labels_train)/100]
+for c in (10000,):
+    clf = svm.SVC(kernel='rbf',C=c)
+    clf.fit(features_train, labels_train)
+
+#t0 = time()
+    pred = clf.predict(features_test)
+    print len(pred)
+    print len([p for p in pred if p == 1])
+#print time()  t0
+#print pred
+
+    #print clf.score(features_test, labels_test)
 
